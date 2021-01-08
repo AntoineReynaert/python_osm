@@ -56,7 +56,10 @@ def map(bbox,height=1000,width=1000):
 		except KeyError:
 			image.draw_linestring(listSommets,(0.0, 0.0, 0.0, 1.0)) # Par defaut le linstring est noir
 
-	image.save("cache_tuile/"+bbox+".png")
+	if __name__ == '__main__':
+		image.save("map.png")
+	else:	
+		image.save("cache_tuile/"+bbox+".png")
 
 	cursor.close()
 	db.close_connection()
