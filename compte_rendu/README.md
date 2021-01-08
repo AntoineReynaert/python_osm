@@ -1,7 +1,9 @@
 # Compte rendu Antoine Reynaert
 
 lien github compte rendu : https://github.com/AntoineReynaert/python_osm/edit/main/compte_rendu/README.md
+
 lien vers les figures annexes : https://github.com/AntoineReynaert/python_osm/edit/main/compte_rendu
+
 lien vers le dépots git du TP : https://github.com/AntoineReynaert/python_osm
 
 
