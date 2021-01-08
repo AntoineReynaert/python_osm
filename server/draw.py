@@ -49,14 +49,12 @@ def map(bbox,height=1000,width=1000):
 	cursor = db.execute_query(query_main + query_box)
 
 	for row in cursor:
-		listSommets=[]
 		highway=row[1]
-		for point in row[0]:
-			listSommets.append(((point.x-x1)/(x2-x1)*height, (y2-point.y)/(y2-y1)*width))
+		listSommets=[((point.x-x1)/(x2-x1)*height, (y2-point.y)/(y2-y1)*width) for point in row[0]]
 		try:
 			image.draw_linestring(listSommets,couleurSVGA[highway])
 		except KeyError:
-			image.draw_linestring(listSommets,(0.0, 0.0, 0.0, 1.0))
+			image.draw_linestring(listSommets,(0.0, 0.0, 0.0, 1.0)) # Par defaut le linstring est noir
 
 	image.save("cache_tuile/"+bbox+".png")
 
