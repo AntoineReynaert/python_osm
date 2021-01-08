@@ -178,7 +178,8 @@ class WMSHandler(BaseHTTPRequestHandler):
  
  On peut également lancer la requête html suivante qui renvoie le résultat présenté figure 3 en annexe :
  
- 
+ http://localhost:4242/wms*?request=GetMap&layers=roads&width=1000&height=1000&srs=EPSG:3857&bbox=634521.098,5637278.202,645653.047,5653062.539
+
   
 
 
