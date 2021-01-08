@@ -1,5 +1,9 @@
 # Compte rendu Antoine Reynaert
 
+lien github compte rendu : https://github.com/AntoineReynaert/python_osm/edit/main/compte_rendu/README.md
+lien vers les figures annexes : https://github.com/AntoineReynaert/python_osm/edit/main/compte_rendu
+lien vers le dépots git du TP : https://github.com/AntoineReynaert/python_osm
+
 
 ### Question 10
 
@@ -180,8 +184,16 @@ class WMSHandler(BaseHTTPRequestHandler):
  
  http://localhost:4242/wms*?request=GetMap&layers=roads&width=1000&height=1000&srs=EPSG:3857&bbox=634521.098,5637278.202,645653.047,5653062.539
 
-  
 
+### Question 15
+
+  On propose de tracer les cours d'eau de la région en remplacant la variable query_main dans le fichier draw.py par :
+  
+```python
+query_main = "SELECT ST_Transform(linestring,3857), tags->'highway' FROM ways WHERE tags?'waterway' " #waterway
+```
+
+Les résultats sont présentés figure 4
 
 
 
