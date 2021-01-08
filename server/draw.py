@@ -3,7 +3,7 @@ import database as db
 
 def map(bbox,height=1000,width=1000):
 
-	couleurSVGA = {
+	couleurRGBA = {
 	"secondary" : (0.0, 0.0, 0.0, 1.0),
 	"unclassified" : (0.0, 0.0, 0.0, 1.0),
 	"primary" : (0.0, 0.0, 0.0, 1.0),
@@ -43,18 +43,21 @@ def map(bbox,height=1000,width=1000):
 		query_box = "AND ST_Xmin(bbox)>"+str(x1)+"AND ST_Xmax(bbox)<"+str(x2)+" AND ST_Ymin(bbox)>"+str(y1)+" AND ST_Ymax(bbox)<"+str(y2)+";"
 	
 	else:
-		query_main = "SELECT ST_Transform(linestring,3857), tags->'highway' FROM ways WHERE tags?'highway' "
+		# query_main = "SELECT ST_Transform(linestring,3857), tags->'highway' FROM ways WHERE tags?'highway' " #highway
+		query_main = "SELECT ST_Transform(linestring,3857), tags->'waterway' FROM ways WHERE tags?'waterway' " #waterway
+
 		query_box = " AND ST_Xmin(ST_Transform(bbox,3857))>"+str(x1)+" AND ST_Xmax(ST_Transform(bbox,3857))<"+str(x2)+" AND ST_Ymin(ST_Transform(bbox,3857))>"+str(y1)+" AND ST_Ymax(ST_Transform(bbox,3857))<"+str(y2)+";"
 
 	cursor = db.execute_query(query_main + query_box)
 
 	for row in cursor:
 		highway=row[1]
-		listSommets=[((point.x-x1)/(x2-x1)*height, (y2-point.y)/(y2-y1)*width) for point in row[0]]
+		listSommets=[((point.x-x1)/(x2-x1)*height, (y2-point.y)/(y2-y1)*width) for point in row[0]] #Nomalisation
 		try:
-			image.draw_linestring(listSommets,couleurSVGA[highway])
+			image.draw_linestring(listSommets,couleurRGBA[highway])
 		except KeyError:
-			image.draw_linestring(listSommets,(0.0, 0.0, 0.0, 1.0)) # Par defaut le linstring est noir
+			# image.draw_linestring(listSommets,(0.0, 0.0, 1.0, 1.0)) #noir
+			image.draw_linestring(listSommets,(0.0, 0.0, 1.0, 1.0)) #bleue
 
 	if __name__ == '__main__':
 		image.save("map.png")

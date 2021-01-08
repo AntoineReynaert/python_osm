@@ -68,7 +68,7 @@ import database as db
 
 def map(bbox,height=1000,width=1000):
 
-	couleurSVGA = {
+	couleurRGBA = {
 	"secondary" : (0.0, 0.0, 0.0, 1.0),
 	"unclassified" : (0.0, 0.0, 0.0, 1.0),
 	"primary" : (0.0, 0.0, 0.0, 1.0),
@@ -194,6 +194,14 @@ class WMSHandler(BaseHTTPRequestHandler):
 ```python
 query_main = "SELECT ST_Transform(linestring,3857), tags->'highway' FROM ways WHERE tags?'waterway' " #waterway
 ```
+
+on paramétre égalment la couleur sur bleue : 
+
+```python
+image.draw_linestring(listSommets,(0.0, 0.0, 1.0, 1.0)) 
+```
+
+
 
 Les résultats sont présentés figure 4
 
